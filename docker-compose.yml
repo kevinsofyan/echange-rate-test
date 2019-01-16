@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+
+  exchange-rate-test:
+    container_name: exchange-rate-test
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '4200:4200'

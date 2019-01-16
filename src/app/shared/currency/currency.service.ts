@@ -8,12 +8,13 @@ import {BaseService} from "../../core/base.service";
 })
 export class CurrencyService extends BaseService{
     baseExhangeRatesUrl: String = "https://api.exchangeratesapi.io/latest";
+    
     constructor(http: HttpClient,
                 router: Router) {
         super(http, router);
     }
 
-    getExhangesRate() {
-        return this.getAPI(`${this.baseExhangeRatesUrl}?symbols=USD,IDR`, true);
+    getExhangesRate(symbols: string) {
+        return this.getAPI(`${this.baseExhangeRatesUrl}?base=USD&symbols=${symbols}`, true);
     }
 }

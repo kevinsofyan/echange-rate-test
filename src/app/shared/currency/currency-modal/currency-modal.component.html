@@ -1,0 +1,10 @@
+<form (ngSubmit)="selectRate()" [formGroup]="modalForm">
+    <div class="form-group">
+      <select class="custom-select custom-select-sm" formControlName="rateSelect">
+        <option [value]="rate.symbol" *ngFor="let rate of ratesType">{{rate.name}}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm btn-block">
+      Submit
+    </button>
+  </form>

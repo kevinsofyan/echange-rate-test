@@ -1,4 +1,26 @@
 .currency-card {
     max-width: 500px;
     width: 100%;
+    
+    .list-group {
+        
+        p {
+            margin-bottom: 0;
+        }
+
+        .list-group-item {
+            display: flex;
+
+            .list-rates {
+                flex: 9
+            }
+    
+            .list-remove {
+                flex: 1;
+                text-align: right;
+            }
+        }
+
+        
+    }
 }

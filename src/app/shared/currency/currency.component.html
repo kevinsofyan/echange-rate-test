@@ -1,18 +1,48 @@
-<div class="card currency-card mx-auto">
+<div class="card currency-card mx-auto text-left">
   <div class="card-header">
-      <div class="input-group">
-          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" value="10">
-          <div class="input-group-append">
-            <span class="input-group-text">$</span>
-          </div>
+    <div class="input-group">
+      <input
+        type="number"
+        class="form-control"
+        aria-label="Amount (to the nearest dollar)"
+        min="10"
+        #inputNumber
+      />
+      <div class="input-group-append">
+        <span class="input-group-text">$</span>
       </div>
+    </div>
   </div>
-  <div class="card-body">
-      <ul class="list-group list-group-flush text-left">
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Vestibulum at eros</li>
-        </ul>
-        <button type="button" class="btn btn-primary btn-lg btn-block">Add More Currencies</button>
-  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let rate of exchangeRateLists; let i = index">
+      <div class="list-rates">
+        <p>
+          {{ rate.symbol }}<span class="float-right">{{ rate.total | currency: rate.symbol }}</span>
+        </p>
+        <p>{{ rate.symbol }} - {{rate.name}}</p>
+        <p>1 USD = {{ rate.rate | currency: rate.symbol }}</p>
+      </div>
+      <div class="list-remove">
+        <button type="button" (click)="doDeleteExchangeRate(i)" class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </li>
+  </ul>
+  <button
+    type="button"
+    (click)="openCurrencySelectModal(content)"
+    class="btn btn-primary btn-sm btn-block"
+  >
+    Add new currency
+  </button>
 </div>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add New Currency</h4>
+  </div>
+  <div class="modal-body">
+    <app-currency-modal [exchangeRateLists]="exchangeRateLists" (selectedRate)="doAddToExchangeRateLists($event)"></app-currency-modal>
+  </div>
+  <div class="modal-footer d-flex justify-content-center"></div>
+</ng-template>

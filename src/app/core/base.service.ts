@@ -21,8 +21,7 @@ export class BaseService {
     }
 
     protected getAPI<T>(url: string, reload?: boolean, optionHeaders?: Array<optionHeaders>): Observable<T> {
-        return this.http.cache(reload).get<T>(``, {
-            headers: this.optionHeaders(optionHeaders)
+        return this.http.cache(reload).get<T>(`${url}`, {
         }).pipe(tap(),
             catchError(this.handleError()));
     }
